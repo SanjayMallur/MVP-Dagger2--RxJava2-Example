@@ -10,8 +10,8 @@ import com.holidaypirates.userposts.util.API;
  */
 public class Injection {
 
-    public static PostRepository provideNotesRepository() {
-        return PostRepositories.getPostManager(API.isConnected() ? new PostServiceAPIImp() : new PostRealmAPIImp());
+    public static PostRepository providePostsRepository() {
+        return MainRepositories.getPostManager(API.isConnected() ? new PostServiceAPIImp() : new MockPostServiceAPIImp());
     }
 
 }
