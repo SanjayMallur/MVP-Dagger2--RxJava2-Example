@@ -2,7 +2,7 @@ package com.holidaypirates.userposts;
 
 import com.holidaypirates.userposts.data.CommentsRepository;
 import com.holidaypirates.userposts.model.Comment;
-import com.holidaypirates.userposts.presenter.CommentsMvpPresenter;
+import com.holidaypirates.userposts.presenter.CommentPresenter;
 import com.holidaypirates.userposts.ui.postdetail.PostsDetailsContractor;
 
 import org.junit.Assert;
@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -32,20 +33,21 @@ public class CommentsUnitTest {
     @Captor
     ArgumentCaptor<CommentsRepository.LoadCommentsCallBack> mLoadCommentsCallBackCaptor;
 
-    private CommentsMvpPresenter mCommentsPresenter;
+    private CommentPresenter mCommentsPresenter;
 
     private static List<Comment> mCommentsList=new ArrayList<>();
+    int postId=1;
 
     @Before
     public void setupCommentsPresenter(){
         MockitoAnnotations.initMocks(this);
-        mCommentsPresenter=new CommentsMvpPresenter(mCommentsRepository);
+        mCommentsPresenter=new CommentPresenter(mCommentsRepository);
         mCommentsPresenter.attachView(mCommentsView);
         Comment mComment=new Comment();
         mComment.setEmail("sanjaymallur@gmail.com");
         mComment.setName("Sanjay");
         mComment.setId("10");
-        mComment.setPostId(1);
+        mComment.setPostId(postId);
         mComment.setBody("Very nice and good capture");
         mCommentsList.add(mComment);
 
@@ -53,17 +55,17 @@ public class CommentsUnitTest {
 
     @Test
     public void loadCommentsFromRepositoryAndLoadToView(){
-        mCommentsPresenter.loadComments();
+        mCommentsPresenter.loadComments(postId);
 
-        verify(mCommentsRepository).getComments(mLoadCommentsCallBackCaptor.capture());
+        verify(mCommentsRepository).getComments(mLoadCommentsCallBackCaptor.capture(),eq(postId));
         mLoadCommentsCallBackCaptor.getValue().onCommentsLoaded(mCommentsList);
 
         verify(mCommentsView).showComments(mCommentsList);
         Assert.assertEquals(mCommentsList.get(0).getId(),"10");
-        Assert.assertEquals(mCommentsList.get(0).getPostId(),1);
         Assert.assertEquals(mCommentsList.get(0).getBody(),"Very nice and good capture");
         Assert.assertEquals(mCommentsList.get(0).getEmail(),"sanjaymallur@gmail.com");
         Assert.assertEquals(mCommentsList.get(0).getName(),"Sanjay");
+        Assert.assertEquals(mCommentsList.get(0).getPostId(),postId);
     }
 
 

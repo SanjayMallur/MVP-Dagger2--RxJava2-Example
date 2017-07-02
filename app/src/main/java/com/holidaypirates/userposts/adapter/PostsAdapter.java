@@ -13,9 +13,8 @@ import com.holidaypirates.userposts.model.Post;
 import java.util.List;
 
 /**
- * Adapter to have ui to show details of posts
+ * {@link PostsAdapter -- Adapter to have ui to show details of posts}
  * @author Sanjay mallur
- * {@link PostsAdapter}
  */
 
 public class PostsAdapter extends LoadMoreBaseAdapter<Post, PostsAdapter.PostViewHolder> {

@@ -1,7 +1,6 @@
 package com.holidaypirates.userposts;
 
 import com.holidaypirates.userposts.data.PostRepository;
-import com.holidaypirates.userposts.networking.services.PostRealmAPIImp;
 import com.holidaypirates.userposts.networking.services.PostServiceAPIImp;
 import com.holidaypirates.userposts.util.API;
 

@@ -10,6 +10,7 @@ import java.util.List;
  */
 @FunctionalInterface
 public interface PostServiceAPI {
+    @FunctionalInterface
     interface PostServiceCallback<T> {
         void onPostsLoaded(T posts);
     }

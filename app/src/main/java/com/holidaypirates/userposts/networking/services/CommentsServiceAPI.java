@@ -14,5 +14,5 @@ public interface CommentsServiceAPI {
     interface CommentsServiceCallBack<T>{
         void onCommentsLoaded(T comments);//overriding method
     }
-    void getComments(CommentsServiceCallBack<List<Comment>> commentsCallBack,String postId);//to get comments from service API with post id
+    void getComments(CommentsServiceCallBack<List<Comment>> commentsCallBack,int postId);//to get comments from service API with post id
 }

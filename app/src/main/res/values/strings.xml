@@ -10,5 +10,8 @@
     <string name="title_activity_post_detail">Post Detail</string>
     <string name="action_settings">Settings</string>
     <string name="post_detail_placeholder">This is the post detail</string>
+    <string name="connection_lost_erorr_message">Connection lost with server</string>
+    <string name="connection_timed_out">Service timed out</string>
+    <string name="internet_error">Please check your internet connection</string>
 
 </resources>

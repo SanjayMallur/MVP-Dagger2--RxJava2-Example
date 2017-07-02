@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.holidaypirates.userposts.networking.services.CommentsServiceAPI;
 import com.holidaypirates.userposts.networking.services.PhotosServiceAPI;
-import com.holidaypirates.userposts.networking.services.PostRealmAPIImp;
 import com.holidaypirates.userposts.networking.services.PostServiceAPI;
-import com.holidaypirates.userposts.networking.services.PostServiceAPIImp;
 import com.holidaypirates.userposts.networking.services.UsersServiceAPI;
 
 /**
@@ -36,14 +34,7 @@ public class MainRepositories {
         }
         return repository;
     }
-    /**
-     * Synchronized  method to instantiate PostManager API or mock API
-     *
-     * @param online to change repo to online
-     */
-    public static synchronized void changeOffLineRepository(boolean online) {
-        ((PostManager) repository).switchAPILayer(online ? new PostServiceAPIImp() : new PostRealmAPIImp());
-    }
+
 
     /**
 * Returning the instance of PhotosManager

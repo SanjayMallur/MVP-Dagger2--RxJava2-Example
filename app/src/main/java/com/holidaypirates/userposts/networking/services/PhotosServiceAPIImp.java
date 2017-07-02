@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.holidaypirates.userposts.model.Photos;
 import com.holidaypirates.userposts.util.API;
+import com.holidaypirates.userposts.util.Utils;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class PhotosServiceAPIImp implements PhotosServiceAPI {
 
             @Override
             public void onFailure(Throwable t) {
+                Utils.showTechnicalErrorDialog(t);
                 Log.e(TAG,Log.getStackTraceString(t));
             }
         });

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.holidaypirates.userposts.model.Post;
 import com.holidaypirates.userposts.util.API;
+import com.holidaypirates.userposts.util.Utils;
 
 import java.util.List;
 
@@ -23,12 +24,12 @@ public class PostServiceAPIImp implements PostServiceAPI {
         callListPosts.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Response<List<Post>> response) {
-                Post.savePostsToRealm(response.body());
                 callback.onPostsLoaded(response.body());
             }
 
             @Override
             public void onFailure(Throwable t) {
+                Utils.showTechnicalErrorDialog(t);
                 Log.e("PostServiceAPIImp",Log.getStackTraceString(t));
             }
         });

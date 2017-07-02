@@ -2,7 +2,7 @@ package com.holidaypirates.userposts;
 
 import com.holidaypirates.userposts.data.PhotosRepository;
 import com.holidaypirates.userposts.model.Photos;
-import com.holidaypirates.userposts.presenter.PhotosMvpPresenter;
+import com.holidaypirates.userposts.presenter.PhotoPresenter;
 import com.holidaypirates.userposts.ui.postdetail.PostsDetailsContractor;
 
 import junit.framework.Assert;
@@ -33,14 +33,14 @@ public class PhotosUnitTest {
     @Captor
     ArgumentCaptor<PhotosRepository.LoadPhotosCallback> mLoadPhotosCallBackCaptor;
 
-    private PhotosMvpPresenter mPhotosPresenter;
+    private PhotoPresenter mPhotosPresenter;
 
     private static List<Photos> mPhotosList=new ArrayList<>();
 
     @Before
     public void setupPhotosPresenter(){
         MockitoAnnotations.initMocks(this);
-        mPhotosPresenter=new PhotosMvpPresenter(mPhotosRepository);
+        mPhotosPresenter=new PhotoPresenter(mPhotosRepository);
         mPhotosPresenter.attachView(mPhotosView);
         Photos mPhotos=new Photos();
         mPhotos.setTitle("Blue Sky");

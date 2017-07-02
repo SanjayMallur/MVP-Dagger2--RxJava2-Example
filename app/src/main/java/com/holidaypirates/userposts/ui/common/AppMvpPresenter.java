@@ -6,7 +6,6 @@ package com.holidaypirates.userposts.ui.common;
  */
 
 public interface AppMvpPresenter<V> {
-
     void attachView(V view);
     void detachView();
 

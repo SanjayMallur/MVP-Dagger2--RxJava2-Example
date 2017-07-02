@@ -28,6 +28,7 @@ public class UsersManager implements UsersRepository{
 
     @Override
     public void getUsers(@NonNull final LoadUsersCallBack usersCallBack) {
+        mUsers.clear();
         mUserServiceAPI.getUsers(new UsersServiceAPI.UsersServiceCallBack<List<User>>() {
             @Override
             public void onUsersLoaded(List<User> users) {

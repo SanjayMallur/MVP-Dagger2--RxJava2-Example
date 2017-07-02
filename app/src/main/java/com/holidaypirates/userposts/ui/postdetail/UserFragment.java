@@ -13,7 +13,7 @@ import com.holidaypirates.userposts.Injection;
 import com.holidaypirates.userposts.R;
 import com.holidaypirates.userposts.adapter.UsersAdapter;
 import com.holidaypirates.userposts.model.User;
-import com.holidaypirates.userposts.presenter.UsersMvpPresenter;
+import com.holidaypirates.userposts.presenter.UserPresenter;
 import com.holidaypirates.userposts.ui.BaseFragment;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
  * @author Sanjay Mallur
  */
 
-public class UserFragment extends BaseFragment<PostsDetailsContractor.UsersMvpPresenter> implements PostsDetailsContractor.UsersView {
+public class UserFragment extends BaseFragment<PostsDetailsContractor.UserPresenter> implements PostsDetailsContractor.UsersView {
 
 
     private RecyclerView usersRecyclerView;
@@ -55,7 +55,7 @@ public class UserFragment extends BaseFragment<PostsDetailsContractor.UsersMvpPr
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mPresenter=new UsersMvpPresenter(Injection.provideUsersRepository());
+        mPresenter=new UserPresenter(Injection.provideUsersRepository());
         super.onViewCreated(view, savedInstanceState);
     }
 

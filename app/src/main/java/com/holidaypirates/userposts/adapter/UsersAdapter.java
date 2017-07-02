@@ -13,9 +13,8 @@ import com.holidaypirates.userposts.model.User;
 import java.util.List;
 
 /**
- * Adapter to have ui to show details of users list
+ *{@link UsersAdapter -- Adapter to have ui to show details of users list}
  * @author Sanjay mallur
- * {@link UsersAdapter}
  */
 
 public class UsersAdapter extends LoadMoreBaseAdapter<User, UsersAdapter.UsersViewHolder> {

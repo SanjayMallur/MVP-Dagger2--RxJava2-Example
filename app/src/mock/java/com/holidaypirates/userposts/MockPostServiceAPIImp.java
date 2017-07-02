@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Class to load mock data on UI
+ * @author Sanjay Mallur
  */
 public class MockPostServiceAPIImp implements PostServiceAPI {
 

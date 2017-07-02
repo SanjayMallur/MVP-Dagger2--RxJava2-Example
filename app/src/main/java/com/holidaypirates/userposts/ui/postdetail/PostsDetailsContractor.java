@@ -15,21 +15,20 @@ import java.util.List;
 
 public interface PostsDetailsContractor {
 
-    interface PhotosMvpPresenter<view> extends AppMvpPresenter<view> {
+     interface PhotoPresenter<v> extends AppMvpPresenter<v> {
         void loadPhotos();
     }
 
-    interface UsersMvpPresenter<view> extends AppMvpPresenter<view> {
+    interface UserPresenter<v> extends AppMvpPresenter<v> {
         void loadUsers();
     }
 
-    interface CommentsMvpPresenter<view> extends AppMvpPresenter<view> {
-        void loadComments(String postId);
+    interface CommentPresenter<v> extends AppMvpPresenter<v> {
+         void loadComments(int postId);
 
     }
-
     interface PhotosView extends AppMvpView {
-        void showPhotos(List<Photos> photos);
+         void showPhotos(List<Photos> photos);
     }
 
     interface UsersView extends AppMvpView {
@@ -37,7 +36,7 @@ public interface PostsDetailsContractor {
     }
 
     interface CommentsView extends AppMvpView {
-        void showComments(List<Comment> comments);
+         void showComments(List<Comment> comments);
     }
 
 }

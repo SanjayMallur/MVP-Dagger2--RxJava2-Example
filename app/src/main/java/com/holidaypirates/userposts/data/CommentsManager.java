@@ -18,7 +18,6 @@ public class CommentsManager implements CommentsRepository {
     private CommentsServiceAPI mCommentsServiceAPI;//Interface to get the data from service API
     private List<Comment> mComments = new ArrayList<>();//List to add comments
 
-
     /**
      * Constructor called From Repositories
      *
@@ -30,7 +29,8 @@ public class CommentsManager implements CommentsRepository {
     }
 
     @Override
-    public void getComments(@NonNull final LoadCommentsCallBack commentsCallBack, String postId) {
+    public void getComments(@NonNull final LoadCommentsCallBack commentsCallBack, int postId) {
+        mComments.clear();
         mCommentsServiceAPI.getComments(new CommentsServiceAPI.CommentsServiceCallBack<List<Comment>>() {
             @Override
             public void onCommentsLoaded(List<Comment> comments) {

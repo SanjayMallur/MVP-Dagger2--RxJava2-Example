@@ -13,17 +13,17 @@ import com.holidaypirates.userposts.Injection;
 import com.holidaypirates.userposts.R;
 import com.holidaypirates.userposts.adapter.PhotosAdapter;
 import com.holidaypirates.userposts.model.Photos;
-import com.holidaypirates.userposts.presenter.PhotosMvpPresenter;
+import com.holidaypirates.userposts.presenter.PhotoPresenter;
 import com.holidaypirates.userposts.ui.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link PhotosFragment -- Place holder fragment containg simple view and calling API to get photos and set adapter to show data on UI after attaching view}
+ * {@link photosFragment -- Place holder fragment containg simple view and calling API to get photos and set adapter to show data on UI after attaching view}
  * @author Sanjay Mallur
  */
-public class PhotosFragment extends BaseFragment<PostsDetailsContractor.PhotosMvpPresenter> implements PostsDetailsContractor.PhotosView {
+public class photosFragment extends BaseFragment<PostsDetailsContractor.PhotoPresenter> implements PostsDetailsContractor.PhotosView {
 
     private RecyclerView photosRecyclerView;//simple recycler view
     private PhotosAdapter mPhotosAdapter;
@@ -51,7 +51,7 @@ public class PhotosFragment extends BaseFragment<PostsDetailsContractor.PhotosMv
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mPresenter = new PhotosMvpPresenter(Injection.providePhotosRepository());
+        mPresenter = new PhotoPresenter(Injection.providePhotosRepository());
         super.onViewCreated(view, savedInstanceState);
     }
 

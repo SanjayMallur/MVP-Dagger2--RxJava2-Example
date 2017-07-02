@@ -29,6 +29,7 @@ public class PhotosManager implements PhotosRepository {
 
     @Override
     public void getPhotos(@NonNull final LoadPhotosCallback photosCallBack) {
+        mPhotos.clear();
         mPhotosServiceAPI.getPhotos(new PhotosServiceAPI.PhotosServiceCallBack<List<Photos>>() {
             @Override
             public void onPhotosLoaded(List<Photos> photos) {

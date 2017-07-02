@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.holidaypirates.userposts.Injection;
 import com.holidaypirates.userposts.R;
@@ -20,6 +21,7 @@ import com.holidaypirates.userposts.presenter.PostsMvpPresenter;
 import com.holidaypirates.userposts.ui.BaseFragment;
 import com.holidaypirates.userposts.ui.custom.EndlessRecyclerOnScrollListener;
 import com.holidaypirates.userposts.ui.postdetail.PostDetailActivity;
+import com.holidaypirates.userposts.util.API;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +32,12 @@ import java.util.List;
  */
 public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresenter> implements PostsContractor.PostsViewApp, PostsAdapter.PostItemListener {
 
-    private RecyclerView rvPosts;
+    private RecyclerView recyclerViewPosts;
     private SwipeRefreshLayout swlMain;
     private PostsAdapter mPostAdapter;
     private EndlessRecyclerOnScrollListener mEndlessRecyclerOnScrollListener;
     private  SharedPreferences sharedpreferences;;
-    public static final String MyPREFERENCES = "AppPref" ;
+    public static final String MY_PREFERENCES = "AppPref" ;
 
     public static PostsFragment newInstance() {
         return new PostsFragment();
@@ -46,12 +48,12 @@ public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresente
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        sharedpreferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        rvPosts = (RecyclerView)rootView.findViewById(R.id.recyclerView);
+        sharedpreferences = getActivity().getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+        recyclerViewPosts = (RecyclerView)rootView.findViewById(R.id.recyclerView);
         swlMain = (SwipeRefreshLayout)rootView.findViewById(R.id.srl_main);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        rvPosts.setHasFixedSize(true);
-        rvPosts.setLayoutManager(linearLayoutManager);
+        recyclerViewPosts.setHasFixedSize(true);
+        recyclerViewPosts.setLayoutManager(linearLayoutManager);
         mEndlessRecyclerOnScrollListener = new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
@@ -60,7 +62,7 @@ public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresente
                 }
             }
         };
-        rvPosts.addOnScrollListener(mEndlessRecyclerOnScrollListener);
+        recyclerViewPosts.addOnScrollListener(mEndlessRecyclerOnScrollListener);
         swlMain.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -89,28 +91,28 @@ public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresente
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     @Override
     public void showPosts(List<Post> posts) {
         swlMain.setRefreshing(false);
         if (mPostAdapter == null) {
             mPostAdapter = new PostsAdapter(new ArrayList<>(posts), this);
-            rvPosts.setAdapter(mPostAdapter);//Setting adapter
+            recyclerViewPosts.setAdapter(mPostAdapter);//Setting adapter
         }
         mPostAdapter.replaceData(new ArrayList<>(posts));//notifyData set changed
     }
 
     @Override
     public void showPostDetailUi(Post post) {
-        Intent intent = new Intent(getActivity(), PostDetailActivity.class);//PostDetailActivity intent
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString("postId", post.getId());
-        editor.commit();
-        startActivity(intent);
+        if(API.isConnected(getActivity())) {
+            Intent intent = new Intent(getActivity(), PostDetailActivity.class);//PostDetailActivity intent
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("postId", post.getId());
+            editor.commit();
+            startActivity(intent);
+        }else{
+            Toast.makeText(getActivity(),getString(R.string.internet_error),Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -13,10 +13,10 @@ import com.holidaypirates.userposts.model.Comment;
 import java.util.List;
 
 /**
- * Adapter to have ui to show details of comments from user
  *
- * @author Sanjay mallur
- *         {@link CommentsAdapter}
+ * {@link CommentsAdapter -- Adapter to have ui to show details of comments from user}
+ * @author Sanjay Mallur
+ *
  */
 
 public class CommentsAdapter extends LoadMoreBaseAdapter<Comment, CommentsAdapter.CommentsViewHolder> {

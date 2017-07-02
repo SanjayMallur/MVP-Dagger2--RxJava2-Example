@@ -17,5 +17,5 @@ public interface CommentsRepository  {
     interface LoadCommentsCallBack{
         void onCommentsLoaded(List<Comment> comments);//to load comments
     }
-    void getComments(@NonNull LoadCommentsCallBack commentsCallBack,String postId);//to get comments from service
+    void getComments(@NonNull LoadCommentsCallBack commentsCallBack,int postId);//to get comments from service
 }

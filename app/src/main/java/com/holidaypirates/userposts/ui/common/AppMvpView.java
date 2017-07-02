@@ -6,7 +6,6 @@ package com.holidaypirates.userposts.ui.common;
  */
 @FunctionalInterface
 public interface AppMvpView {
-
     void setProgressIndicator(boolean active);
 
 }

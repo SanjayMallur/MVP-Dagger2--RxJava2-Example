@@ -15,9 +15,8 @@ import com.holidaypirates.userposts.model.Photos;
 import java.util.List;
 
 /**
- * Adapter to have ui to show details of photos
+ * {@link PhotosAdapter --  Adapter to have ui to show details of photos}
  * @author Sanjay mallur
- * {@link PhotosAdapter}
  */
 
 public class PhotosAdapter extends LoadMoreBaseAdapter<Photos, PhotosAdapter.PhotosViewHolder> {

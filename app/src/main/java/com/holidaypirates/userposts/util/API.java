@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.holidaypirates.userposts.BuildConfig;
-import com.holidaypirates.userposts.HolidayPiratesApp;
 import com.holidaypirates.userposts.networking.interfaces.APIService;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -55,11 +54,11 @@ public class API {
 
     /**
      * Method check for internet connection
+     *
      * @return boolean
      */
-    public static boolean isConnected() {
-        ConnectivityManager conMgr = (ConnectivityManager) HolidayPiratesApp.getContext()
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isConnected(Context mContext) {
+        ConnectivityManager conMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo i = conMgr.getActiveNetworkInfo();
         if (i == null)
             return false;

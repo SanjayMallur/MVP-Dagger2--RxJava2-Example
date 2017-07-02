@@ -3,7 +3,7 @@ package com.holidaypirates.userposts;
 import com.holidaypirates.userposts.data.UsersRepository;
 import com.holidaypirates.userposts.model.User;
 import com.holidaypirates.userposts.ui.postdetail.PostsDetailsContractor;
-import com.holidaypirates.userposts.presenter.UsersMvpPresenter;
+import com.holidaypirates.userposts.presenter.UserPresenter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,14 +33,14 @@ public class UsersUnitTest {
     @Captor
     ArgumentCaptor<UsersRepository.LoadUsersCallBack> mLoadUsersCallBackCaptor;
 
-    private UsersMvpPresenter mUsersPresenter;
+    private UserPresenter mUsersPresenter;
 
     private static List<User> mUsersList=new ArrayList<>();
 
     @Before
     public void setupPhotosPresenter(){
         MockitoAnnotations.initMocks(this);
-        mUsersPresenter=new UsersMvpPresenter(mUsersRepository);
+        mUsersPresenter=new UserPresenter(mUsersRepository);
         mUsersPresenter.attachView(mUsersView);
         User user=new User();
         user.setId(1);

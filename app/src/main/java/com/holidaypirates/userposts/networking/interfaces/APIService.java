@@ -25,7 +25,7 @@ public interface APIService {
     Call<List<Photos>> getPhotos();
     //Call for comments as per post ID
     @GET("posts/{postId}/comments")
-    Call<List<Comment>> getComments(@Path("postId") String postId);
+    Call<List<Comment>> getComments(@Path("postId") int postId);
     //Call for users
     @GET("users")
     Call<List<User>> getUsers();
