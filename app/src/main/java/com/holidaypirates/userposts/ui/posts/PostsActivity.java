@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.holidaypirates.userposts.R;
 /**
- * {@link PostsActivity --Activity to have detailed contents example: userFragment,photosFragment, commentsFragment}
+ * {@link PostsActivity --Activity to have detailed contents example: userFragment,PhotoFragment, CommentFragment}
  * @author Sanjay Mallur
  * */
 public class PostsActivity extends AppCompatActivity {

@@ -17,7 +17,7 @@ public class Utils {
     private static Context context;
 
     private Utils(Context mContext) {
-        this.context=mContext;
+        Utils.context=mContext;
         // Method to follow java conventions
     }
 

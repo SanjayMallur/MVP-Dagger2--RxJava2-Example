@@ -16,8 +16,6 @@ import com.holidaypirates.userposts.networking.services.UsersServiceAPIImp;
  */
 public class Injection {
 
-   public static String TEST = "mock";
-
    public static PostRepository providePostsRepository() {
       return MainRepositories.getPostManager(new PostServiceAPIImp());
    }
