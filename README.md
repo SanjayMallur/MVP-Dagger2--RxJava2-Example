@@ -64,7 +64,6 @@ apt 'com.google.dagger:dagger-compiler:2.7'
    1. Change Build Variant to mockDebug and Sync project
    2. Run application and verify mock data on UI
 
-```
 ## Built With
 
 * [Retrofit2](https://github.com/square/retrofit) - Type-safe HTTP client for Android
