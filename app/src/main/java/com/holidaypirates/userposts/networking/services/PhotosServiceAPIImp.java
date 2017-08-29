@@ -2,15 +2,19 @@ package com.holidaypirates.userposts.networking.services;
 
 import android.util.Log;
 
+import com.holidaypirates.userposts.AppApplication;
 import com.holidaypirates.userposts.model.Photos;
-import com.holidaypirates.userposts.util.API;
+import com.holidaypirates.userposts.networking.interfaces.APIService;
 import com.holidaypirates.userposts.util.Utils;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
+import javax.inject.Inject;
+
+import retrofit2.Retrofit;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * {@link PhotosServiceAPIImp --Getting photos list response from API as List}.
@@ -19,22 +23,34 @@ import retrofit.Response;
 
 public class PhotosServiceAPIImp implements PhotosServiceAPI {
     private static final String TAG="PhotosServiceAPI";
+    @Inject
+    Retrofit retrofit;
+
 
     @Override
     public void getPhotos(final PhotosServiceCallBack<List<Photos>> callBack) {
-        Call<List<Photos>> callPhotosList = API.get().getRetrofitService().getPhotos();
-        callPhotosList.enqueue(new Callback<List<Photos>>() {
-            @Override
-            public void onResponse(Response<List<Photos>> response) {
-                callBack.onPhotosLoaded(response.body());
-            }
+        AppApplication.getNetComponent().inject(this);
+        APIService apiService=retrofit.create(APIService.class);
+        rx.Observable<List<Photos>> callPhotosList = apiService.getPhotos();
+        callPhotosList.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Photos>>() {
+                    @Override
+                    public void onCompleted() {
+                        //nothing
+                    }
 
-            @Override
-            public void onFailure(Throwable t) {
-                Utils.showTechnicalErrorDialog(t);
-                Log.e(TAG,Log.getStackTraceString(t));
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        Utils.showTechnicalErrorDialog(e);
+                        Log.e(TAG,Log.getStackTraceString(e));
+                    }
+
+                    @Override
+                    public void onNext(List<Photos> photoses) {
+                        callBack.onPhotosLoaded(photoses);
+                    }
+                });
     }
 
 

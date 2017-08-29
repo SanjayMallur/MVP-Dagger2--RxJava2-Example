@@ -1,14 +1,10 @@
 package com.holidaypirates.userposts;
 
 import com.holidaypirates.userposts.data.CommentsRepository;
+import com.holidaypirates.userposts.data.MainRepositories;
 import com.holidaypirates.userposts.data.PhotosRepository;
 import com.holidaypirates.userposts.data.PostRepository;
-import com.holidaypirates.userposts.data.MainRepositories;
 import com.holidaypirates.userposts.data.UsersRepository;
-import com.holidaypirates.userposts.networking.services.CommentsServiceAPIImp;
-import com.holidaypirates.userposts.networking.services.PhotosServiceAPIImp;
-import com.holidaypirates.userposts.networking.services.PostServiceAPIImp;
-import com.holidaypirates.userposts.networking.services.UsersServiceAPIImp;
 
 /**
  * Class to inject whether online or offline mocked data
@@ -17,16 +13,16 @@ import com.holidaypirates.userposts.networking.services.UsersServiceAPIImp;
 public class Injection {
 
    public static PostRepository providePostsRepository() {
-      return MainRepositories.getPostManager(new PostServiceAPIImp());
+      return MainRepositories.getPostManager(new MockPostServiceAPIImp());
    }
    public static PhotosRepository providePhotosRepository(){
-      return MainRepositories.getPostsDetailManager(new PhotosServiceAPIImp());
+      return MainRepositories.getPostsDetailManager(new MockPhotosServiceAPIImp());
    }
    public static UsersRepository provideUsersRepository(){
-      return MainRepositories.getUsersManager(new UsersServiceAPIImp());
+      return MainRepositories.getUsersManager(new MockUserServiceAPIImp());
    }
    public static CommentsRepository provideCommentsRepository(){
-      return MainRepositories.getCommentsManager(new CommentsServiceAPIImp());
+      return MainRepositories.getCommentsManager(new MockCommentsServiceAPIImp());
    }
 
 }

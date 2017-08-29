@@ -48,6 +48,7 @@ public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresente
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         sharedpreferences = getActivity().getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
         recyclerViewPosts = (RecyclerView)rootView.findViewById(R.id.recyclerView);
         swlMain = (SwipeRefreshLayout)rootView.findViewById(R.id.srl_main);
@@ -111,7 +112,7 @@ public class PostsFragment extends BaseFragment<PostsContractor.PostsMvpPresente
             editor.commit();
             startActivity(intent);
         }else{
-            Toast.makeText(getActivity(),getString(R.string.internet_error),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),getActivity().getString(R.string.internet_error),Toast.LENGTH_SHORT).show();
         }
     }
 

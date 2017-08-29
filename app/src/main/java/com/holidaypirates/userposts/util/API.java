@@ -4,12 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.holidaypirates.userposts.BuildConfig;
 import com.holidaypirates.userposts.networking.interfaces.APIService;
-import com.squareup.okhttp.OkHttpClient;
-
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 
 /**
  * Class to instantiate API service with Retrofit
@@ -31,25 +26,6 @@ public class API {
             instance = new API();
         }
         return instance;
-    }
-
-    /**
-     * Instantiate retrofit service with Base URl which is defined in gradle
-     *
-     * @return service returning service to interface
-     */
-    public APIService getRetrofitService() {
-        if (service == null) {
-            OkHttpClient client = new OkHttpClient();
-            client.interceptors().add(new LoggingInterceptor());
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(BuildConfig.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(client)
-                    .build();
-            service = retrofit.create(APIService.class);
-        }
-        return service;
     }
 
     /**

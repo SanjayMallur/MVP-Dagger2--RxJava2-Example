@@ -37,7 +37,6 @@ public class UserFragment extends BaseFragment<PostsDetailsContractor.UserPresen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_users_detail, container, false);
         usersRecyclerView=(RecyclerView)rootView.findViewById(R.id.users_list);
-
         LinearLayoutManager usersLinearManager = new LinearLayoutManager(getActivity());
         usersRecyclerView.setLayoutManager(usersLinearManager);
         usersRecyclerView.setItemAnimator(new DefaultItemAnimator());

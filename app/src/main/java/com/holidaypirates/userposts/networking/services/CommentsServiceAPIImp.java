@@ -2,15 +2,20 @@ package com.holidaypirates.userposts.networking.services;
 
 import android.util.Log;
 
+import com.holidaypirates.userposts.AppApplication;
 import com.holidaypirates.userposts.model.Comment;
-import com.holidaypirates.userposts.util.API;
+import com.holidaypirates.userposts.networking.interfaces.APIService;
 import com.holidaypirates.userposts.util.Utils;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
+import javax.inject.Inject;
+
+import retrofit2.Retrofit;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * {@link CommentsServiceAPIImp --Getting comments list response from API as List}.
@@ -19,24 +24,34 @@ import retrofit.Response;
 
 public class CommentsServiceAPIImp implements CommentsServiceAPI {
     private static final String TAG="CommentsServiceAPIImp";
-
+    @Inject
+    Retrofit retrofit;
 
     @Override
     public void getComments(final CommentsServiceCallBack<List<Comment>> commentsCallBack,int postId) {
-        Call<List<Comment>> callCommentsList= API.get().getRetrofitService().getComments(postId);
-        callCommentsList.enqueue(new Callback<List<Comment>>() {
-            @Override
-            public void onResponse(Response<List<Comment>> response) {
-                commentsCallBack.onCommentsLoaded(response.body());//adding data
-            }
+        AppApplication.getNetComponent().inject(this);
+        APIService apiService=retrofit.create(APIService.class);
 
-            @Override
-            public void onFailure(Throwable t) {
-                Utils.showTechnicalErrorDialog(t);
-                Log.e(TAG,Log.getStackTraceString(t));//Failed to fetch comments
+        Observable<List<Comment>> callCommentsList= apiService.getComments(postId);
+        callCommentsList.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Comment>>() {
+                    @Override
+                    public void onCompleted() {
+                    //Nothing to be implemented
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        Utils.showTechnicalErrorDialog(e);
+                        Log.e(TAG,Log.getStackTraceString(e));//Failed to fetch comments
+                    }
+
+                    @Override
+                    public void onNext(List<Comment> comments) {
+                        commentsCallBack.onCommentsLoaded(comments);
+                    }
+                });
     }
 
 }
