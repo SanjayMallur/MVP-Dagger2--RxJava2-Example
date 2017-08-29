@@ -65,7 +65,9 @@ new CommentsServiceAPIImp() --> new MockCommentsServiceAPIImp()
 ## Built With
 
 * [Retrofit2](https://github.com/square/retrofit) - Type-safe HTTP client for Android
-* [glide](https://github.com/bumptech/glide) - An image loading and caching library for Android
+* [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android
+* [Dagger2](https://github.com/google/dagger) - A fast dependency injector for Android and Java
+* [RxJava](https://github.com/ReactiveX/RxJava) - A library for composing asynchronous and event-based programs using observable sequences for the Java VM.
 
 
 ## Architecture used
