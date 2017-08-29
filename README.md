@@ -35,9 +35,20 @@ testCompile "junit:junit:4.12"
 testCompile "org.mockito:mockito-all:1.10.19"
 
 //support libraries
-compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
-compile 'com.squareup.retrofit:converter-gson:2.0.0-beta1'
 compile 'com.github.bumptech.glide:glide:3.7.0'
+compile 'com.artemzin.rxjava:proguard-rules:1.2.2.0'
+compile 'com.google.dagger:dagger:2.7'
+compile 'com.squareup.okhttp3:okhttp:3.4.1'
+compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+compile 'io.reactivex:rxjava:1.2.2'
+compile 'com.squareup.retrofit2:retrofit:2.1.0'
+compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+compile 'com.google.code.gson:gson:2.7'
+compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+compile 'io.reactivex:rxandroid:1.2.1'
+provided 'javax.annotation:jsr250-api:1.0'
+apt 'com.google.dagger:dagger-compiler:2.7'
 ```
 
 
@@ -50,13 +61,7 @@ compile 'com.github.bumptech.glide:glide:3.7.0'
 ###  Running the mock tests
 
 
-1. Go to src/mock/java/com.holidaypirates.userposts/Injection
-2. Change 
-```
-new PostServiceAPIImp() --> new MockPostServiceAPIImp()
-new PhotosServiceAPIImp() --> new MockPhotosServiceAPIImp()
-new UsersServiceAPIImp() --> new MockUsersServiceAPIImp()
-new CommentsServiceAPIImp() --> new MockCommentsServiceAPIImp()
+Change Build Variant to mockDebug and Sync project
 ```
 
    3. Run application and verify mock data on UI 
