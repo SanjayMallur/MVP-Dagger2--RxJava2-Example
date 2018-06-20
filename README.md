@@ -1,4 +1,4 @@
-# Holiday Pirates
+# MVP-Dagger2--RxJava2-Example
 
 This project is about showing list of user's post on Recyclerview with Title and Body. Clicking on each post takes to details page where user can see list of users with details like name, email id, first 20 photos of post and user comments on that post.
 

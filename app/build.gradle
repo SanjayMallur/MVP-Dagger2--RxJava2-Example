@@ -1,24 +1,19 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'android-apt'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    flavorDimensions "default"
+
 
     defaultConfig {
-        applicationId "com.holidaypirates.userposts"
-        minSdkVersion 15
-        targetSdkVersion 25
+        applicationId "com.example.userposts"
+        minSdkVersion 16
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
-    
-   lintOptions {
-        abortOnError false
-    }
-    
     buildTypes {
         debug {
 
@@ -64,7 +59,10 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'io.reactivex:rxandroid:1.2.1'
     provided 'javax.annotation:jsr250-api:1.0'
-    apt 'com.google.dagger:dagger-compiler:2.7'
+
+    compile 'com.google.dagger:dagger:2.7'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+
 
 
 }

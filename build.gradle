@@ -3,10 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:3.1.2'
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -16,6 +17,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -27,7 +29,7 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // App dependencies
-    supportLibraryVersion = '23.1.1'
+    supportLibraryVersion = '26.1.0'
     junitVersion = '4.12'
     mockitoVersion = '1.10.19'
     glideVersion='3.7.0'
